@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+
+  orchestrator:
+    build:
+      context: ./orchestrator
+    env_file:
+      - .env
+    environment:
+      - PORT=8080
+      - SQLITE_PATH=/data/orchestrator.db
+    ports:
+      - '8080:8080'
+    volumes:
+      - orchestrator_data:/data
+    depends_on:
+      - redis
+
+  worker:
+    build:
+      context: ./worker
+    env_file:
+      - .env
+    environment:
+      - AGENT_IMAGE=ai-dev-orchestrator-agent:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/workspaces:/tmp/workspaces
+    depends_on:
+      - redis
+      - orchestrator
+
+  agent-image:
+    image: ai-dev-orchestrator-agent:latest
+    build:
+      context: ./agent
+    command: ['node', '--version']
+
+volumes:
+  orchestrator_data:

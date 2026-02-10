@@ -1,0 +1,22 @@
+{
+  "action": {
+    "id": "65fb2fa01b0bba6ad8f0a123",
+    "type": "commentCard",
+    "date": "2026-01-04T08:33:10.123Z",
+    "data": {
+      "text": "Merci de traiter ceci @ai-backend",
+      "card": {
+        "id": "65fb2fa0ee4ebf1a2d3c4b5d",
+        "name": "Ajouter endpoint health check"
+      },
+      "board": {
+        "id": "65f9dce88f8b9f8d0ab1c222",
+        "name": "Produit MVP"
+      },
+      "list": {
+        "id": "65f9dd2f8f8b9f8d0ab1c333",
+        "name": "To Do"
+      }
+    }
+  }
+}
